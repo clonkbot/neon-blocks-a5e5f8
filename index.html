@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neon Blocks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Share Tech Mono', monospace;
+        background: #0a0a0f;
+      }
+
+      .font-orbitron {
+        font-family: 'Orbitron', sans-serif;
+      }
+
+      .font-tech {
+        font-family: 'Share Tech Mono', monospace;
+      }
+
+      /* Grid background */
+      .grid-bg {
+        background-image:
+          linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+
+      /* Neon glow effects */
+      .neon-cyan {
+        color: #00ffff;
+        text-shadow:
+          0 0 5px #00ffff,
+          0 0 10px #00ffff,
+          0 0 20px #00ffff,
+          0 0 40px #00ffff,
+          0 0 80px #00ffff;
+      }
+
+      .neon-border-cyan {
+        border: 2px solid #00ffff;
+        box-shadow:
+          0 0 5px #00ffff,
+          0 0 10px #00ffff,
+          inset 0 0 5px rgba(0, 255, 255, 0.1);
+      }
+
+      .neon-border-yellow {
+        border: 2px solid #ffd700;
+        box-shadow:
+          0 0 5px #ffd700,
+          0 0 10px #ffd700,
+          inset 0 0 5px rgba(255, 215, 0, 0.1);
+      }
+
+      .neon-border-pink {
+        border: 2px solid #ff00ff;
+        box-shadow:
+          0 0 5px #ff00ff,
+          0 0 10px #ff00ff,
+          inset 0 0 5px rgba(255, 0, 255, 0.1);
+      }
+
+      .neon-button {
+        background: transparent;
+        border: 2px solid #ff00ff;
+        color: #ff00ff;
+        text-shadow: 0 0 10px #ff00ff;
+        box-shadow:
+          0 0 5px #ff00ff,
+          0 0 10px #ff00ff,
+          inset 0 0 10px rgba(255, 0, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .neon-button:hover {
+        background: rgba(255, 0, 255, 0.2);
+        box-shadow:
+          0 0 10px #ff00ff,
+          0 0 20px #ff00ff,
+          0 0 40px #ff00ff,
+          inset 0 0 20px rgba(255, 0, 255, 0.3);
+      }
+
+      /* Scanline effect */
+      .scanlines::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.15),
+          rgba(0, 0, 0, 0.15) 1px,
+          transparent 1px,
+          transparent 2px
+        );
+        pointer-events: none;
+        z-index: 100;
+      }
+
+      /* Block colors with glow */
+      .block-cyan {
+        background: linear-gradient(135deg, #00ffff 0%, #008b8b 100%);
+        box-shadow: 0 0 5px #00ffff, inset 0 0 3px rgba(255,255,255,0.5);
+      }
+      .block-yellow {
+        background: linear-gradient(135deg, #ffff00 0%, #b8b800 100%);
+        box-shadow: 0 0 5px #ffff00, inset 0 0 3px rgba(255,255,255,0.5);
+      }
+      .block-purple {
+        background: linear-gradient(135deg, #9400d3 0%, #4b0082 100%);
+        box-shadow: 0 0 5px #9400d3, inset 0 0 3px rgba(255,255,255,0.5);
+      }
+      .block-green {
+        background: linear-gradient(135deg, #00ff00 0%, #008000 100%);
+        box-shadow: 0 0 5px #00ff00, inset 0 0 3px rgba(255,255,255,0.5);
+      }
+      .block-red {
+        background: linear-gradient(135deg, #ff4444 0%, #8b0000 100%);
+        box-shadow: 0 0 5px #ff4444, inset 0 0 3px rgba(255,255,255,0.5);
+      }
+      .block-blue {
+        background: linear-gradient(135deg, #4444ff 0%, #00008b 100%);
+        box-shadow: 0 0 5px #4444ff, inset 0 0 3px rgba(255,255,255,0.5);
+      }
+      .block-orange {
+        background: linear-gradient(135deg, #ff8c00 0%, #8b4500 100%);
+        box-shadow: 0 0 5px #ff8c00, inset 0 0 3px rgba(255,255,255,0.5);
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+
+      @keyframes flicker {
+        0%, 100% { opacity: 1; }
+        92% { opacity: 1; }
+        93% { opacity: 0.8; }
+        94% { opacity: 1; }
+        96% { opacity: 0.9; }
+        97% { opacity: 1; }
+      }
+
+      .animate-flicker {
+        animation: flicker 4s infinite;
+      }
+
+      .animate-pulse-slow {
+        animation: pulse 2s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
